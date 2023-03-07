@@ -8,6 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+import java.io.IOException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,10 +25,13 @@ public class SeleniumTest {
         }
     }
     @Test
-    public void testSelenium() {
+    public void testSelenium() throws IOException {
         // WebDriverManager.chromedriver().setup();
+        Resource resource = new ClassPathResource("chromedriver.exe");
+        String filePath = resource.getFile().getPath();
 
-        System.setProperty("webdriver.chrome.driver", "C:\\Meine Dateien\\5.Semster FHDW\\Testing\\chromedriver.exe");
+        System.out.println(filePath);
+        System.setProperty("webdriver.chrome.driver", filePath);
         // Starte den Chrome Webdriver
         WebDriver driver = new ChromeDriver();
 
